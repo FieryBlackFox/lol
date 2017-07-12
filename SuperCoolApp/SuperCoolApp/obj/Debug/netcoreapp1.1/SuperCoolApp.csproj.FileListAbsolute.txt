@@ -1,0 +1,9 @@
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\bin\Debug\netcoreapp1.1\SuperCoolApp.deps.json
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\bin\Debug\netcoreapp1.1\SuperCoolApp.runtimeconfig.json
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\bin\Debug\netcoreapp1.1\SuperCoolApp.runtimeconfig.dev.json
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\bin\Debug\netcoreapp1.1\SuperCoolApp.dll
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\bin\Debug\netcoreapp1.1\SuperCoolApp.pdb
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\obj\Debug\netcoreapp1.1\SuperCoolApp.csprojResolveAssemblyReference.cache
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\obj\Debug\netcoreapp1.1\SuperCoolApp.AssemblyInfo.cs
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\obj\Debug\netcoreapp1.1\SuperCoolApp.dll
+c:\users\d.belozerova\documents\visual studio 2017\Projects\SuperCoolApp\SuperCoolApp\obj\Debug\netcoreapp1.1\SuperCoolApp.pdb
