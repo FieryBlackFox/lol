@@ -1,1 +1,10 @@
-﻿<h1>сюда будут загружаться фото</h1>
+﻿<h3>Выберите файл для загрузки</h3>
+               
+<!--<form asp-action="AddFile" asp-controller="Home" method="post" enctype="multipart/form-data">
+    <input type="file" name="uploadedFile" />
+
+    <p><button (click)="goAbout()">Загрузить</button></p>
+</form>-->
+
+<input #fileInput type="file" enctype="multipart/form-data" />
+<button (click)="addFile()">Add</button>

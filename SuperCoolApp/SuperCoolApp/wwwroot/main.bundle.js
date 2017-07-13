@@ -34,7 +34,7 @@ var AboutComponent = (function () {
 AboutComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* Component */])({
         selector: 'about-app',
-        template: "<h3>\u041E \u0441\u0430\u0439\u0442\u0435</h3>"
+        template: "<h3>\u0417\u0434\u0435\u0441\u044C \u0431\u0443\u0434\u0435\u0442 \u0437\u0430\u0433\u0440\u0443\u0436\u0435\u043D\u043D\u043E\u0435 \u0444\u043E\u0442\u043E \u0438 URL</h3>"
     })
 ], AboutComponent);
 
@@ -63,7 +63,7 @@ module.exports = module.exports.toString();
 /***/ "../../../../../src/app/app.component.html":
 /***/ (function(module, exports) {
 
-module.exports = "<div>\r\n  <nav>\r\n    <a routerLink=\"\">Главная</a>\r\n    <a routerLink=\"/about\">О сайте</a>\r\n    <a routerLink=\"/photos\">Мои фотографии</a>\r\n  </nav>\r\n  <router-outlet></router-outlet>\r\n</div>"
+module.exports = "<div>\r\n  <nav>\r\n    <a routerLink=\"\">Главная</a>\r\n    <a routerLink=\"/photos\">Мои фотографии</a>\r\n  </nav>\r\n  <router-outlet></router-outlet>\r\n</div>"
 
 /***/ }),
 
@@ -171,11 +171,21 @@ AppModule = __decorate([
 
 /***/ }),
 
+/***/ "../../../../../src/app/home.component.html":
+/***/ (function(module, exports) {
+
+module.exports = "<h3>Выберите файл для загрузки</h3>\r\n               \r\n<!--<form asp-action=\"AddFile\" asp-controller=\"Home\" method=\"post\" enctype=\"multipart/form-data\">\r\n    <input type=\"file\" name=\"uploadedFile\" />\r\n\r\n    <p><button (click)=\"goAbout()\">Загрузить</button></p>\r\n</form>-->\r\n\r\n<input #fileInput type=\"file\" enctype=\"multipart/form-data\" />\r\n<button (click)=\"addFile()\">Add</button>"
+
+/***/ }),
+
 /***/ "../../../../../src/app/home.component.ts":
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_router__ = __webpack_require__("../../../router/@angular/router.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__img_service__ = __webpack_require__("../../../../../src/app/img.service.ts");
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return HomeComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -183,20 +193,104 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
     else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
     return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
 
 var HomeComponent = (function () {
-    function HomeComponent() {
+    function HomeComponent(router, http) {
+        this.router = router;
+        this.http = http;
+        this.imgService = new __WEBPACK_IMPORTED_MODULE_3__img_service__["a" /* ImgService */](this.http);
     }
+    HomeComponent.prototype.addFile = function () {
+        var fi = this.fileInput.nativeElement;
+        if (fi.files) {
+            var fileToUpload = fi.files;
+            this.imgService
+                .upload(fileToUpload)
+                .subscribe(function (res) {
+                if (res.status == 201) {
+                    console.log(res.url + " " + res.statusText);
+                }
+                else {
+                    console.log("G");
+                }
+                console.log(res.status);
+            });
+        }
+    };
     return HomeComponent;
 }());
+__decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_14" /* ViewChild */])("fileInput"),
+    __metadata("design:type", Object)
+], HomeComponent.prototype, "fileInput", void 0);
 HomeComponent = __decorate([
     __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["_13" /* Component */])({
         selector: 'home-app',
-        template: "<h3>\u0413\u043B\u0430\u0432\u043D\u0430\u044F</h3>"
-    })
+        template: __webpack_require__("../../../../../src/app/home.component.html"),
+        providers: [__WEBPACK_IMPORTED_MODULE_3__img_service__["a" /* ImgService */]]
+    }),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_router__["b" /* Router */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_http__["b" /* Http */]) === "function" && _b || Object])
 ], HomeComponent);
 
+var _a, _b;
 //# sourceMappingURL=home.component.js.map
+
+/***/ }),
+
+/***/ "../../../../../src/app/img.service.ts":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__("../../../core/@angular/core.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_http__ = __webpack_require__("../../../http/@angular/http.es5.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__ = __webpack_require__("../../../../rxjs/add/operator/map.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__ = __webpack_require__("../../../../rxjs/add/operator/catch.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_catch__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ImgService; });
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+
+
+
+var ImgService = (function () {
+    function ImgService(http) {
+        this.http = http;
+    }
+    ;
+    ImgService.prototype.upload = function (files) {
+        var formData = new FormData();
+        //for (let i = 0; i < files.length; i++) {
+        console.log(files[0]);
+        formData.append("files", files[0]);
+        console.log(formData);
+        //}
+        return this.http
+            .post('/api/values', formData);
+    };
+    return ImgService;
+}());
+ImgService = __decorate([
+    __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["v" /* Injectable */])(),
+    __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__angular_http__["b" /* Http */]) === "function" && _a || Object])
+], ImgService);
+
+var _a;
+//# sourceMappingURL=img.service.js.map
 
 /***/ }),
 

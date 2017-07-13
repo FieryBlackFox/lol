@@ -37,24 +37,29 @@ namespace SuperCoolApp
     //}
 
     [HttpPost]
-    public async Task<IActionResult> AddFile(IFormFile uploadedFile)
+    public async void UploadFiless([FromForm] IFormFileCollection files)
     {
+      Console.WriteLine(files.Count);
+      var uploadedFile = files[0];
+      Response.ContentType = "text/html";
       if (uploadedFile != null)
       {
         // путь к папке Files
         string path = "/Files/" + uploadedFile.FileName;
-        // сохраняем файл в папку Files в каталоге wwwroot
-        using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+        using (var fileStream = new FileStream(_appEnvironment.ContentRootPath + path, FileMode.Create))
         {
           await uploadedFile.CopyToAsync(fileStream);
         }
         Image file = new Image { Name = uploadedFile.FileName, Path = path, User = Request.Cookies["UserCookies"] };
         _context.Images.Add(file);
         _context.SaveChanges();
-        return View("About", file);
+        Response.StatusCode = (int)HttpStatusCode.Created;
+        await Response.WriteAsync(file.Path);
       }
-      return RedirectToAction("Index");
-
+      else Response.StatusCode = (int)HttpStatusCode.NoContent;
+      
+        Console.WriteLine("Ура");
+      
     }
 
   }

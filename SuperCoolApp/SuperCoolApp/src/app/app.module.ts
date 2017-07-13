@@ -16,7 +16,6 @@ const appRoutes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'photos', component: PhotosComponent },
     { path: '**', component: NotFoundComponent }
-    
 ];
 
 @NgModule({
